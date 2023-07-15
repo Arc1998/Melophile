@@ -53,10 +53,10 @@ const initialState = {
        state.currentIndex=action.payload.currentIndex
      },
      addIndex(state){
-      state.currentIndex+=1
+      state.currentIndex++
      },
      reduceIndex(state){
-      state.currentIndex-=1
+      state.currentIndex--
      }
    },
  });

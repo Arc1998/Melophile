@@ -1,4 +1,4 @@
-import {  useEffect, useRef } from "react";
+import {  useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPlay,setCurrentSong,addIndex,reduceIndex } from "../../reducers/songReducer";
 import { StyledSongPlayerContainer, StyledPlayIcon, StyledPauseIcon } from "./StyledSongPlayerContainer";
@@ -14,7 +14,6 @@ const SongPlayerContainer = () => {
     currentIndex
   } = useSelector((state: { song: any }) => state.song);
   const audioRef = useRef<HTMLAudioElement>(null);
-
   const togglePlayback = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -62,7 +61,7 @@ const SongPlayerContainer = () => {
         <button onClick={()=>{
            dispatch(addIndex())
            dispatch(setCurrentSong({currentSong:search===""?songs[currentIndex]:searchSongs[currentIndex]}))
-        }}>next</button>
+     }}>next</button>
       </div>
       <audio ref={audioRef} src={currentSong?.previewUrl} />
     </StyledSongPlayerContainer>
