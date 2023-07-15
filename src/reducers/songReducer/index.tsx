@@ -30,10 +30,11 @@ const initialState = {
      },
      addToFavourite(state:any,action){
       let flag=false
-      state.favSongs.map((item:any)=>{
+       state.favSongs.map((item:any)=>{
            if(item.previewUrl===action.payload.favSong.previewUrl){
            flag=true
            }
+           return  1
       })
        if(!flag)
         state.favSongs.push(action.payload.favSong);
