@@ -1,16 +1,17 @@
 import { Layout } from "antd";
-import React from "react";
 import {
 
   SidebarPanel,
 
 } from "./style";
 import SongPlayerContainer from "../SongPlayerContainer";
-
-
+import SongContainer from "../SongContainer";
+import { useSelector } from "react-redux";
 const { Sider } = Layout;
 const SideBar = (props: any) => {
-
+  const {
+    favSongs
+  } = useSelector((state: { song: any }) => state.song); 
   return (
     <SidebarPanel >
       <Layout >
@@ -23,6 +24,10 @@ const SideBar = (props: any) => {
           overflow: "auto",
           }}>
          <SongPlayerContainer />
+        <div style={{marginTop:"12px"}}>
+        <h2>Favourite Songs</h2>
+        <SongContainer songs={favSongs}/>
+        </div>
         </Sider>
       </Layout>
     </SidebarPanel>
