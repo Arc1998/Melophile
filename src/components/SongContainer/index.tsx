@@ -33,6 +33,8 @@ const SongContainer = (props: any) => {
     <>
       {props.songs?.length ? (
         props.songs.map((song: any, index: number) => (
+          <>
+          <div style={{display:"flex",justifyContent:"space-between"}}>
           <StyledSongContainer key={index} onClick={() => { setSong(song)
             dispatch(setCurrentIndex({currentIndex:index}))
           }}>
@@ -50,15 +52,17 @@ const SongContainer = (props: any) => {
                 🎵
               </StyledMusicEmoji>
             ) : null}
+            </StyledSongContainer>
             <StyledHeartIcon
               onClick={() => {
                 !user.isLoggedIn
                   ? navigate("/login")
-                  : dispatch(addToFavourite({ favSong: currentSong }));
+                  : dispatch(addToFavourite({ favSong: song }));
                 console.log(favSongs);
               }}
             />
-          </StyledSongContainer>
+            </div>
+            </>
         ))
       ) : (
         <p>LOADING</p>
