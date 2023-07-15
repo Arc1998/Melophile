@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PlayCircleOutlined, PauseCircleOutlined, HeartOutlined } from "@ant-design/icons";
+import { PlayCircleOutlined, PauseCircleOutlined} from "@ant-design/icons";
 
 export const StyledSongPlayerContainer = styled.div`
   display: flex;
