@@ -49,11 +49,6 @@ const SongsContainer = () => {
 
     if (newSongs?.data !== null && newSongs?.data !== undefined) {
       const refinedData = refineSongsData(newSongs?.data);
-      dispatch(
-        setCurrentSong({
-          currentSong: refinedData[0]
-        })
-      );
       dispatch(setSerchedSong({ searchSongs: refinedData }));
     }
   };
