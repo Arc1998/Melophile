@@ -22,7 +22,7 @@ const SongsContainer = () => {
   const getSongData = async () => {
     setIsLoading(true);
     const newSongs = await getSongs(
-      "Hollywood ",
+      "New Bollywood Songs",
       page,
       DEFAULT_SONG_REQUEST_LIMIT
     );
