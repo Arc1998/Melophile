@@ -14,6 +14,7 @@ const initialState = {
      isPlaying: false,
    },
    searchSongs: [],
+   currentIndex:0,
    favSongs:[]
  };
  
@@ -40,10 +41,19 @@ const initialState = {
      setSearch(state, action) {
        state.songAction.search = action.payload.search;
      },
+     setCurrentIndex(state, action){
+       state.currentIndex=action.payload.currentIndex
+     },
+     addIndex(state){
+      state.currentIndex+=1
+     },
+     reduceIndex(state){
+      state.currentIndex-=1
+     }
    },
  });
  
- export const {addToFavourite, setCurrentSong, setSongs, setPlay, setSerchedSong, setSearch } =
+ export const {addToFavourite, setCurrentSong, setSongs, setPlay, setSerchedSong, setSearch,setCurrentIndex,addIndex,reduceIndex} =
    actions;
  
  export default songReducer;

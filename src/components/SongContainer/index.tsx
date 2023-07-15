@@ -3,6 +3,7 @@ import {
   setCurrentSong,
   setPlay,
   addToFavourite,
+  setCurrentIndex
 } from "../../reducers/songReducer";
 import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji } from "../SongContainer/StyledSongContainer"
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,9 @@ const SongContainer = (props: any) => {
     <>
       {props.songs?.length ? (
         props.songs.map((song: any, index: number) => (
-          <StyledSongContainer key={index} onClick={() => { setSong(song) }}>
+          <StyledSongContainer key={index} onClick={() => { setSong(song)
+            dispatch(setCurrentIndex({currentIndex:index}))
+          }}>
             <StyledImage src={song?.artworkUrl100} alt="pic" />
             <StyledTrackInfo>
               <StyledTrackName>
