@@ -21,13 +21,13 @@ const SongsContainer = () => {
 
   const getSongData = async () => {
     setIsLoading(true);
+    console.log(search)
     const newSongs = await getSongs(
-      "New Bollywood Songs",
+      "Hollywood",
       page,
       DEFAULT_SONG_REQUEST_LIMIT
     );
     setIsLoading(false);
-
     if (newSongs?.data !== null) {
       const refinedData = refineSongsData(newSongs?.data);
       if (currentSong.previewUrl === "") {
@@ -39,6 +39,7 @@ const SongsContainer = () => {
       }
       dispatch(setSongs({ songs: refinedData }));
     }
+    console.log(songs)
   };
 
   const getSearchSong = async () => {
@@ -48,6 +49,11 @@ const SongsContainer = () => {
 
     if (newSongs?.data !== null && newSongs?.data !== undefined) {
       const refinedData = refineSongsData(newSongs?.data);
+      dispatch(
+        setCurrentSong({
+          currentSong: refinedData[0]
+        })
+      );
       dispatch(setSerchedSong({ searchSongs: refinedData }));
     }
   };
@@ -76,10 +82,10 @@ const SongsContainer = () => {
       getSearchSong();
     }
     // eslint-disable-next-line
-  }, [search]);
+  },);
 
   useEffect(() => {
-    getSongData();
+     getSongData();
     // eslint-disable-next-line
   }, []);
 
@@ -89,7 +95,7 @@ const SongsContainer = () => {
       <SongsContainerWrapper>
         <SideBar />
         <div className="songs-container">
-          <SongContainer songs={!search ? songs : searchSongs} />
+          <SongContainer songs={search===""?songs:searchSongs} />
         </div>
       </SongsContainerWrapper>
     </>

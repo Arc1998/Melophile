@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import {  useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPlay } from "../../reducers/songReducer";
 import { StyledSongPlayerContainer, StyledPlayIcon, StyledPauseIcon } from "./StyledSongPlayerContainer";
@@ -12,15 +12,13 @@ const SongPlayerContainer = () => {
   } = useSelector((state: { song: any }) => state.song);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [initial, setinitial] = useState(true);
-
   const togglePlayback = () => {
     if (audioRef.current) {
-      if (audioRef.current.paused || isPlaying) {
+      if (isPlaying) {
         audioRef.current
           .play()
           .catch((error) => console.log("Autoplay prevented:", error));
-      } else if (!audioRef.current.paused || !isPlaying) {
+      } else if (!isPlaying) {
         audioRef.current.pause();
       }
     }
@@ -38,11 +36,7 @@ const SongPlayerContainer = () => {
   console.log({ currentSong })
 
   useEffect(() => {
-    if (initial) {
-      setinitial(false);
-    } else {
       togglePlayback();
-    }
     // eslint-disable-next-line
   }, [currentSong.previewUrl, isPlaying]);
 
