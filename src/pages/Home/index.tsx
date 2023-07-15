@@ -82,7 +82,7 @@ const SongsContainer = () => {
       getSearchSong();
     }
     // eslint-disable-next-line
-  },);
+  },[search]);
 
   useEffect(() => {
      getSongData();

@@ -34,7 +34,7 @@ const initialState = {
        state.songAction.isPlaying = action.payload.isPlaying;
      },
      setSerchedSong(state:any, action) {
-       state.searchSongs=action.payload.searchSongs;
+       state.searchSongs.push(...action.payload.searchSongs);
      },
      setSearch(state, action) {
        state.songAction.search = action.payload.search;
