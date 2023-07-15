@@ -6,6 +6,7 @@ import { logout } from "../../reducers/userReducer";
 import { Button } from "../../atom/Button";
 import { Input } from '../../atom/InputBox';
 import { setSearch } from "../../reducers/songReducer";
+
 interface NavHeaderProps {
   children?: React.ReactNode;
   loggedUser?: string;
@@ -16,7 +17,6 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchData,setSearchData]=useState("")
-
  
 
   const handleLogout = () => {
@@ -26,7 +26,10 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
      if(searchData==="")
      alert("Enter Valid Data")
      else{
+      if(user.isLoggedIn===true)
       dispatch(setSearch({search:searchData}))
+      else
+      navigate("/login")
      }
   };
 
