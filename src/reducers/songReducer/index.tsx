@@ -29,7 +29,14 @@ const initialState = {
        state.songs.push(...action.payload.songs);
      },
      addToFavourite(state:any,action){
-       state.favSongs.push(action.payload.favSong);
+      let flag=false
+      state.favSongs.map((item:any)=>{
+           if(item.previewUrl===action.payload.favSong.previewUrl){
+           flag=true
+           }
+      })
+       if(!flag)
+        state.favSongs.push(action.payload.favSong);
      },
      setPlay(state, action) {
        state.songAction.isPlaying = action.payload.isPlaying;
