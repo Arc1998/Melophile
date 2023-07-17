@@ -11,9 +11,7 @@ export const PrimaryBtn = styled(Button)`
   cursor: pointer;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #ff2070;
-  }
+  
 `;
 
 

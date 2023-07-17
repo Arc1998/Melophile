@@ -23,7 +23,7 @@ const SongsContainer = () => {
     setIsLoading(true);
     console.log(search)
     const newSongs = await getSongs(
-      "Hollywood",
+      search,
       page,
       DEFAULT_SONG_REQUEST_LIMIT
     );
