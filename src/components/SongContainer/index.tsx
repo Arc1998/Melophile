@@ -65,7 +65,7 @@ const SongContainer = (props: any) => {
             </>
         ))
       ) : (
-        <p>LOADING</p>
+        <p>Your Favourite song list is empty</p>
       )}
     </>
   );

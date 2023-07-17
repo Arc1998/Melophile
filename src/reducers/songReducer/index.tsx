@@ -28,17 +28,19 @@ const initialState = {
      setSongs(state:any, action) {
        state.songs.push(...action.payload.songs);
      },
-     addToFavourite(state:any,action){
-      let flag=false
-       state.favSongs.map((item:any)=>{
-           if(item.previewUrl===action.payload.favSong.previewUrl){
-           flag=true
-           }
-           return  1
-      })
-       if(!flag)
-        state.favSongs.push(action.payload.favSong);
-     },
+     addToFavourite(state: any, action) {
+      const favSong = action.payload.favSong;
+      const songIndex = state.favSongs.findIndex(
+        (song : any) => song.previewUrl === favSong.previewUrl
+      );
+      if (songIndex !== -1) {
+        state.favSongs.splice(songIndex, 1);
+        alert("Song is removed from the favorite song list.");
+      } else {
+        state.favSongs.push(favSong);
+        alert("Song is added to the favorite song list.");
+      }
+    },
      setPlay(state, action) {
        state.songAction.isPlaying = action.payload.isPlaying;
      },
