@@ -47,12 +47,13 @@ const SongContainer = (props: any) => {
                 {song?.artistName?.slice(0, 10)}
               </StyledArtistName>
             </StyledTrackInfo>
+            </StyledSongContainer>
             {currentSong?.previewUrl === song.previewUrl && isPlaying ? (
               <StyledMusicEmoji role="img" aria-label="music-emoji">
                 🎵
               </StyledMusicEmoji>
             ) : null}
-            </StyledSongContainer>
+            
             <StyledHeartIcon
               onClick={() => {
                 !user.isLoggedIn

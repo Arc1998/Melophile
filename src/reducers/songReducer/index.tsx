@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { showToast } from '../../atom/Notification';
 const initialState = {
    songs: [],
    currentSong: {
@@ -35,10 +36,16 @@ const initialState = {
       );
       if (songIndex !== -1) {
         state.favSongs.splice(songIndex, 1);
-        alert("Song is removed from the favorite song list.");
+        showToast({
+          message: "Song removed from favorite list",
+          description: '',
+        });
       } else {
         state.favSongs.push(favSong);
-        alert("Song is added to the favorite song list.");
+        showToast({
+          message: "Song added to favorite list",
+          description: '',
+        });
       }
     },
      setPlay(state, action) {

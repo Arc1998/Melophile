@@ -13,6 +13,6 @@ export const showToast = (params: {
       message: message,
       description: description,
       icon: <CheckedIcon style={{ color: "#5FCFA9" }} />,
-      duration: 5,
+      duration: 3,
     });
   };
