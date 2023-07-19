@@ -7,6 +7,7 @@ import {
 } from "../../reducers/songReducer";
 import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji } from "../SongContainer/StyledSongContainer"
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../atom/Notification";
 
 const SongContainer = (props: any) => {
   const {
@@ -55,13 +56,19 @@ const SongContainer = (props: any) => {
             ) : null}
             
             <StyledHeartIcon
-              onClick={() => {
-                !user.isLoggedIn
-                  ? navigate("/login")
-                  : dispatch(addToFavourite({ favSong: song }));
-                console.log(favSongs);
-              }}
-            />
+  onClick={() => {
+    if (!user.isLoggedIn) {
+      showToast({
+        message: "You need to Login first",
+        description: '',
+      });
+      navigate("/login");
+    } else {
+      dispatch(addToFavourite({ favSong: song }));
+      console.log(favSongs);
+    }
+  }}
+/>
             </div>
             </>
         ))
