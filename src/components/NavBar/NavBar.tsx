@@ -23,20 +23,23 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
   const handleFormSubmit = (e: any) => {
-    if (searchData === "")
-      alert("Enter Valid Data")
-    else {
-      if (user.isLoggedIn === true)
-        dispatch(setSearch({ search: searchData }))
-      else
-        navigate("/login")
+    if (searchData === "") {
+      alert("Enter Valid Data");
+    } else {
+      if (user.isLoggedIn === true) {
+        dispatch(setSearch({ search: searchData }));
+      } else {
+        navigate("/login");
         showToast({
           message: "You need to Login first",
           description: '',
         });
+      }
     }
   };
+
 
 
   const handlenavigate = () => {
