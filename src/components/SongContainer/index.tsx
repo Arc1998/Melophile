@@ -7,7 +7,7 @@ import {
 } from "../../reducers/songReducer";
 import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji } from "../SongContainer/StyledSongContainer"
 import { useNavigate } from "react-router-dom";
-import { showToast } from "../../atom/Notification";
+import { NotificationIconType, showToast } from "../../atom/Notification";
 
 const SongContainer = (props: any) => {
   const {
@@ -59,8 +59,9 @@ const SongContainer = (props: any) => {
                 onClick={() => {
                   if (!user.isLoggedIn) {
                     showToast({
-                      message: "You need to Login first",
-                      description: '',
+                      message: "Please log in to access this feature.",
+                      description: "",
+                      iconType: NotificationIconType.EXCLAMATORY,
                     });
                     navigate("/login");
                   } else {

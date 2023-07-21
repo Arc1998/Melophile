@@ -6,7 +6,7 @@ import { logout } from "../../reducers/userReducer";
 import { Button } from "../../atom/Button";
 import { Input } from "../../atom/InputBox";
 import { setSearch } from "../../reducers/songReducer";
-import { showToast } from "../../atom/Notification";
+import { NotificationIconType, showToast } from "../../atom/Notification";
 
 interface NavHeaderProps {
   children?: React.ReactNode;
@@ -28,8 +28,9 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
     e.preventDefault();
     if (searchData === "") {
       showToast({
-        message: "Enter Valid Data",
-        description: "",
+        message: "Enter a song or artist name to search.",
+        description: " ",
+        iconType: NotificationIconType.CROSS,
       });
     } else {
       try {
@@ -39,8 +40,9 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
         } else {
           navigate("/login");
           showToast({
-            message: "You need to Login first",
+            message: "Please log in to access this feature.",
             description: "",
+            iconType: NotificationIconType.EXCLAMATORY,
           });
         }
       } catch (error) {

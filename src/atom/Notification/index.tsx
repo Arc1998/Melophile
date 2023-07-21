@@ -1,18 +1,40 @@
 import { notification } from "antd";
-import { CheckedIcon } from "./style";
+import { CheckedIcon, CrossIcon, ExclamatoryIcon } from "./style";
 import { NotificationPlacement } from "antd/es/notification/interface";
 
+export enum NotificationIconType {
+  CHECKED = "checked",
+  CROSS = "cross",
+  EXCLAMATORY = "exclamatory",
+}
 
 export const showToast = (params: {
-    message: string;
-    description: string;
-    placement?: NotificationPlacement;
-  }) => {
-    const { message, description } = params;
-    notification.open({
-      message: message,
-      description: description,
-      icon: <CheckedIcon style={{ color: "#5FCFA9" }} />,
-      duration: 3,
-    });
-  };
+  message: string;
+  description: string;
+  iconType?: NotificationIconType;
+  placement?: NotificationPlacement;
+}) => {
+  const { message, description, iconType } = params;
+  let iconComponent = null;
+
+  switch (iconType) {
+    case NotificationIconType.CHECKED:
+      iconComponent = <CheckedIcon style={{ color: "#5FCFA9" }} />;
+      break;
+    case NotificationIconType.CROSS:
+      iconComponent = <CrossIcon style={{ color: "#FF6060" }} />;
+      break;
+    case NotificationIconType.EXCLAMATORY:
+      iconComponent = <ExclamatoryIcon style={{ color: "#FFC133" }} />;
+      break;
+    default:
+      break;
+  }
+
+  notification.open({
+    message: message,
+    description: description,
+    icon: iconComponent,
+    duration: 3,
+  });
+};

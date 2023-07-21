@@ -7,7 +7,7 @@ import { Label } from '../../atom/FormLable';
 import { Input } from '../../atom/InputBox';
 import { Button } from '../../atom/Button';
 import { PageBackground, Card } from './LoginFormStyles';
-import { showToast } from '../../atom/Notification';
+import { NotificationIconType, showToast } from '../../atom/Notification';
 
 
 const LoginForm = () => {
@@ -17,8 +17,9 @@ const LoginForm = () => {
   const handleFormSubmit = (values: any) => {
     dispatch(login({ name: values.username, email: values.email }));
     showToast({
-      message: "Login succesfully",
-      description: '',
+      message: "Login successful. Enjoy your music journey!",
+      description: "",
+      iconType: NotificationIconType.CHECKED,
     });
     navigate('/home');
   };
