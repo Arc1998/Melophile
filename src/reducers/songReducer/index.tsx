@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { showToast } from '../../atom/Notification';
+import { NotificationIconType, showToast } from '../../atom/Notification';
 const initialState = {
    songs: [],
    currentSong: {
@@ -37,14 +37,16 @@ const initialState = {
       if (songIndex !== -1) {
         state.favSongs.splice(songIndex, 1);
         showToast({
-          message: "Song removed from favorite list",
-          description: '',
+          message: "Hooray! Song successfully added to favorites.",
+          description: "",
+          iconType: NotificationIconType.CHECKED,
         });
       } else {
         state.favSongs.push(favSong);
         showToast({
-          message: "Song added to favorite list",
-          description: '',
+          message: "Song removed from favorites. We'll miss it!",
+          description: "",
+          iconType: NotificationIconType.CHECKED,
         });
       }
     },

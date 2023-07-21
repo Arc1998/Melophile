@@ -69,13 +69,13 @@ const SongsContainer = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLoading]);
+  }, );
 
   useEffect(() => {
     if (search) {
       getSearchSong();
     }
-  }, [search]);
+  }, );
 
   useEffect(() => {
     getSongData();
