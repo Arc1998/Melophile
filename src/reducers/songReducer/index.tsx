@@ -37,14 +37,14 @@ const initialState = {
       if (songIndex !== -1) {
         state.favSongs.splice(songIndex, 1);
         showToast({
-          message: "Hooray! Song successfully added to favorites.",
+          message: "Song removed from favorites. We'll miss it!",
           description: "",
           iconType: NotificationIconType.CHECKED,
         });
       } else {
         state.favSongs.push(favSong);
         showToast({
-          message: "Song removed from favorites. We'll miss it!",
+          message: "Hooray! Song successfully added to favorites.",
           description: "",
           iconType: NotificationIconType.CHECKED,
         });

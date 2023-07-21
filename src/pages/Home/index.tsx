@@ -1,6 +1,4 @@
-
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DEFAULT_SONG_REQUEST_LIMIT } from "../../constants";
 import SongContainer from "../../components/SongContainer";
@@ -16,12 +14,12 @@ const SongsContainer = () => {
     currentSong,
     songAction: { search },
     searchSongs,
-  } = useSelector((state: { song: any }) => state.song);
+  } = useSelector((state:any) => state.song);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 
-  const getSongData = async () => {
+  const getSongData = useCallback(async () => {
     setIsLoading(true);
     try {
       const newSongs = await getSongs("New Bollywood songs", page, DEFAULT_SONG_REQUEST_LIMIT);
@@ -41,9 +39,9 @@ const SongsContainer = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [dispatch, page, currentSong.previewUrl]);
 
-  const getSearchSong = async () => {
+  const getSearchSong = useCallback(async () => {
     setIsLoading(true);
     try {
       const newSongs = await getSongs(search);
@@ -56,30 +54,29 @@ const SongsContainer = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [dispatch, search]);
 
-  const handleScroll = async () => {
+  const handleScroll = useCallback(async () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
       return;
     }
     setPage((prev) => prev + 1);
-    await getSongData();
-  };
+  }, [isLoading]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, );
+  }, [handleScroll]);
 
   useEffect(() => {
     if (search) {
       getSearchSong();
     }
-  }, );
+  }, [search, getSearchSong]);
 
   useEffect(() => {
     getSongData();
-  }, []);
+  }, [getSongData]);
 
   return (
     <>
@@ -99,4 +96,3 @@ const SongsContainer = () => {
 };
 
 export default SongsContainer;
-
