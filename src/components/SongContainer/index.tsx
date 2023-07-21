@@ -13,7 +13,6 @@ const SongContainer = (props: any) => {
   const {
     currentSong,
     songAction: { isPlaying },
-    favSongs,
   } = useSelector((state: { song: any }) => state.song);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,45 +34,46 @@ const SongContainer = (props: any) => {
       {props.songs?.length ? (
         props.songs.map((song: any, index: number) => (
           <>
-          <div style={{display:"flex",justifyContent:"space-between"}}>
-          <StyledSongContainer key={index} onClick={() => { setSong(song)
-            dispatch(setCurrentIndex({currentIndex:index}))
-          }}>
-            <StyledImage src={song?.artworkUrl100} alt="pic" />
-            <StyledTrackInfo>
-              <StyledTrackName>
-                {song?.trackCensoredName}
-              </StyledTrackName>
-              <StyledArtistName>
-                {song?.artistName?.slice(0, 10)}
-              </StyledArtistName>
-            </StyledTrackInfo>
-            </StyledSongContainer>
-            {currentSong?.previewUrl === song.previewUrl && isPlaying ? (
-              <StyledMusicEmoji role="img" aria-label="music-emoji">
-                🎵
-              </StyledMusicEmoji>
-            ) : null}
-            
-            <StyledHeartIcon
-  onClick={() => {
-    if (!user.isLoggedIn) {
-      showToast({
-        message: "You need to Login first",
-        description: '',
-      });
-      navigate("/login");
-    } else {
-      dispatch(addToFavourite({ favSong: song }));
-      console.log(favSongs);
-    }
-  }}
-/>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <StyledSongContainer key={index} onClick={() => {
+                setSong(song)
+                dispatch(setCurrentIndex({ currentIndex: index }))
+              }}>
+                <StyledImage src={song?.artworkUrl100} alt="pic" />
+                <StyledTrackInfo>
+                  <StyledTrackName>
+                    {song?.trackCensoredName}
+                  </StyledTrackName>
+                  <StyledArtistName>
+                    {song?.artistName?.slice(0, 10)}
+                  </StyledArtistName>
+                </StyledTrackInfo>
+              </StyledSongContainer>
+              {currentSong?.previewUrl === song.previewUrl && isPlaying ? (
+                <StyledMusicEmoji role="img" aria-label="music-emoji">
+                  🎵
+                </StyledMusicEmoji>
+              ) : null}
+
+              <StyledHeartIcon
+                onClick={() => {
+                  if (!user.isLoggedIn) {
+                    showToast({
+                      message: "You need to Login first",
+                      description: '',
+                    });
+                    navigate("/login");
+                  } else {
+                    dispatch(addToFavourite({ favSong: song }));
+
+                  }
+                }}
+              />
             </div>
-            </>
+          </>
         ))
       ) : (
-        <p>Your Favourite song list is empty</p>
+        <p>No song Available</p>
       )}
     </>
   );

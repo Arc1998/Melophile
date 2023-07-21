@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { Label } from '../../atom/FormLable';
 import { Input } from '../../atom/InputBox';
 import { Button } from '../../atom/Button';
-import { PageBackground, Card } from './LoginFormStyles'; // Import the styled components
+import { PageBackground, Card } from './LoginFormStyles';
 import { showToast } from '../../atom/Notification';
 
 
@@ -15,9 +15,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = (values: any) => {
-    console.log(values);
     dispatch(login({ name: values.username, email: values.email }));
-   // alert('Login Successful');
     showToast({
       message: "Login succesfully",
       description: '',
@@ -34,8 +32,8 @@ const LoginForm = () => {
   const { handleSubmit, values, setFieldValue, errors } = formik;
 
   return (
-    <PageBackground> 
-      <Card> 
+    <PageBackground>
+      <Card>
         <div>
           <Label text='Name' ismandatory={true} />
           <Input

@@ -6,14 +6,11 @@ export const getSongs = async (
   limit?: number
 ) => {
   try {
-    const url = `https://itunes.apple.com/search/?term=${
-      term || `term`
-    }&offset=${offset || `term`}&limit=${limit || DEFAULT_SONG_REQUEST_LIMIT}`;
+    const url = `https://itunes.apple.com/search/?term=${term || `term`
+      }&offset=${offset || `term`}&limit=${limit || DEFAULT_SONG_REQUEST_LIMIT}`;
 
     const songs = await axios(url);
-    // console.log(songs)
     if (songs.data) {
-      // console.log(songs)
       return { data: songs?.data?.results || [], error: null };
     }
   } catch (error: any) {
@@ -22,7 +19,7 @@ export const getSongs = async (
 };
 
 export const refineSongsData = (data: any) => {
-  const songsList:any = [];
+  const songsList: any = [];
   for (const song of data) {
     if (!song.previewUrl) {
       continue;
