@@ -24,7 +24,7 @@ const SongsContainer = () => {
   const getSongData = async () => {
     setIsLoading(true);
     try {
-      const newSongs = await getSongs("Hollywood songs", page, DEFAULT_SONG_REQUEST_LIMIT);
+      const newSongs = await getSongs(search, page, DEFAULT_SONG_REQUEST_LIMIT);
       if (newSongs?.data !== null) {
         const refinedData = refineSongsData(newSongs?.data);
         if (currentSong.previewUrl === "") {
