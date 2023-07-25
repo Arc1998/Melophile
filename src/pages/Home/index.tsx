@@ -2,11 +2,11 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DEFAULT_SONG_REQUEST_LIMIT } from "../../constants";
 import SongContainer from "../../components/SongContainer";
-import {  setCurrentSong, setSerchedSong, setSongs } from "../../reducers/songReducer";
+import { setCurrentSong, setSerchedSong, setSongs } from "../../reducers/songReducer";
 import { getSongs, refineSongsData } from "./helper";
 import NavHeader from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar";
-import { SongsContainerWrapper } from "./SongsContainerStyles";
+import { NoResultsMessage, SongsContainerWrapper } from "./SongsContainerStyles";
 
 const SongsContainer = () => {
   const {
@@ -14,10 +14,12 @@ const SongsContainer = () => {
     currentSong,
     songAction: { search },
     searchSongs,
-  } = useSelector((state:{song:SongState}) => state.song);
+  } = useSelector((state : {song: SongState}) => state.song);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+
+  const [searchResultsAvailable, setSearchResultsAvailable] = useState(true);
 
   const getSongData = useCallback(async () => {
     setIsLoading(true);
@@ -48,6 +50,8 @@ const SongsContainer = () => {
       if (newSongs?.data !== null && newSongs?.data !== undefined) {
         const refinedData = refineSongsData(newSongs?.data);
         dispatch(setSerchedSong({ searchSongs: refinedData }));
+
+        setSearchResultsAvailable(refinedData.length > 0);
       }
     } catch (error) {
       console.error("Error while searching songs:", error);
@@ -87,7 +91,11 @@ const SongsContainer = () => {
           {isLoading ? (
             <p>Loading...</p>
           ) : (
-            <SongContainer songs={search === "" ? songs : searchSongs} />
+            searchResultsAvailable ? (
+              <SongContainer songs={search === "" ? songs : searchSongs} />
+            ) : (
+              <NoResultsMessage>Oops! No matching songs found. Keep searching!</NoResultsMessage>
+            )
           )}
         </div>
       </SongsContainerWrapper>

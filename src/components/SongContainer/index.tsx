@@ -9,8 +9,6 @@ import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, Sty
 import { useNavigate } from "react-router-dom";
 import { NotificationIconType, showToast } from "../../atom/Notification";
 
-
-
 const SongContainer = (props: SongContainerProps) => {
   const {
     currentSong,

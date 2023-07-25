@@ -5,6 +5,6 @@ export const SidebarPanel = styled.div`
     width: 300x !important;
     min-width: 300px !important;
     max-width: 300px !important;
-    background: #e0f8e8;
+    background: white;
   }
 `;
