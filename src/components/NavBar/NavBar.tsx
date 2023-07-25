@@ -1,12 +1,21 @@
 import React, { FC, useState } from "react";
-import { CustomHeader } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../reducers/userReducer";
-import { Button } from "../../atom/Button";
-import { Input } from "../../atom/InputBox";
 import { setSearch } from "../../reducers/songReducer";
 import { NotificationIconType, showToast } from "../../atom/Notification";
+import { Button } from "../../atom/Button";
+import { Input } from "../../atom/InputBox";
+import {
+  CustomHeader,
+  Container,
+  LogoContainer,
+  Logo,
+  SearchBoxContainer,
+  ButtonContainer,
+} from "./style"; 
+
+
 
 const NavHeader: FC<NavHeaderProps> = ({ children }) => {
   const user = useSelector((state: any) => state.user);
@@ -54,32 +63,35 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
 
   return (
     <CustomHeader>
-      <div>
-        {!user.isLoggedIn && <span className="welcome-text">Welcome Melophile !</span>}
-        {user.isLoggedIn && <span className="welcome-text">Welcome, {user.userAuth.name}!</span>}
-      </div>
-      <div>
-        <form onSubmit={handleFormSubmit}>
-          <div style={{ display: "flex" }}>
-            <Input
-              id="searchData"
-              name="searchData"
-              placeholder="Search For Song"
-              value={searchData}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchData(e.target.value)}
-            />
-            <Button
-              variant="primary"
-              size={"large"}
-              text={"Search"}
-              type={"submit"}
-              style={{ marginLeft: "4px", marginTop: "8px" }}
-              isDisable={isLoading}
-            />
-          </div>
-        </form>
-      </div>
-      <div>
+      <Container>
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
+        <SearchBoxContainer>
+          <form onSubmit={handleFormSubmit}>
+            <div style={{ display: "flex" }}>
+              <Input
+                id="searchData"
+                name="searchData"
+                placeholder="Search For Song"
+                value={searchData}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchData(e.target.value)
+                }
+              />
+              <Button
+                variant="primary"
+                size={"large"}
+                text={"Search"}
+                type={"submit"}
+                style={{ marginLeft: "4px", marginTop: "8px" }}
+                isDisable={isLoading}
+              />
+            </div>
+          </form>
+        </SearchBoxContainer>
+      
+      <ButtonContainer>
         {!user.isLoggedIn && (
           <Button
             variant="primary"
@@ -100,7 +112,8 @@ const NavHeader: FC<NavHeaderProps> = ({ children }) => {
             isDisable={isLoading}
           />
         )}
-      </div>
+      </ButtonContainer>
+      </Container>
     </CustomHeader>
   );
 };

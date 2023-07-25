@@ -18,6 +18,6 @@ export const FormInput = styled(Input)`
 
 export const ErrorContainer = styled.span`
   display: flex;
-  margin-bottom: 10px; /* Add margin-bottom for distance between error and next field/button */
+  margin-bottom: 10px; 
 `;
 
