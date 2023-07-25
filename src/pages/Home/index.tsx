@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DEFAULT_SONG_REQUEST_LIMIT } from "../../constants";
 import SongContainer from "../../components/SongContainer";
-import { setCurrentSong, setSerchedSong, setSongs } from "../../reducers/songReducer";
+import {  setCurrentSong, setSerchedSong, setSongs } from "../../reducers/songReducer";
 import { getSongs, refineSongsData } from "./helper";
 import NavHeader from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar";
@@ -14,7 +14,7 @@ const SongsContainer = () => {
     currentSong,
     songAction: { search },
     searchSongs,
-  } = useSelector((state:any) => state.song);
+  } = useSelector((state:{song:SongState}) => state.song);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);

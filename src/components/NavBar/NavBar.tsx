@@ -8,11 +8,6 @@ import { Input } from "../../atom/InputBox";
 import { setSearch } from "../../reducers/songReducer";
 import { NotificationIconType, showToast } from "../../atom/Notification";
 
-interface NavHeaderProps {
-  children?: React.ReactNode;
-  loggedUser?: string;
-}
-
 const NavHeader: FC<NavHeaderProps> = ({ children }) => {
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();

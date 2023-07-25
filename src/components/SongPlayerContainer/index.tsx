@@ -1,36 +1,22 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setPlay,
-  setCurrentSong,
-  addIndex,
-  reduceIndex
-} from "../../reducers/songReducer";
+import { Button } from "../../atom/Button";
 import {
   StyledSongPlayerContainer,
   StyledPlayIcon,
   StyledPauseIcon
 } from "./StyledSongPlayerContainer";
-import { Button } from "../../atom/Button";
 
-const SongPlayerContainer = () => {
-  const dispatch = useDispatch();
-  const {
-    songs,
-    currentSong,
-    songAction: { search, isPlaying },
-    searchSongs,
-    currentIndex
-  } = useSelector((state: { song: any }) => state.song);
+
+const SongPlayerContainer = (props :SongPlayerContainerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const togglePlayback = () => {
     if (audioRef.current) {
-      if (isPlaying) {
+      if (props.isPlaying) {
         audioRef.current
           .play()
           .catch((error) => console.log("Autoplay prevented:", error));
-      } else if (!isPlaying) {
+      } else {
         audioRef.current.pause();
       }
     }
@@ -38,34 +24,28 @@ const SongPlayerContainer = () => {
 
   const togglePlay = () => {
     if (audioRef.current) {
-      if (audioRef.current.paused || !isPlaying) {
-        dispatch(setPlay({ isPlaying: true }));
-      } else if (!audioRef.current.paused || isPlaying) {
-        dispatch(setPlay({ isPlaying: false }));
+      if (audioRef.current.paused || !props.isPlaying) {
+        props.setPlay(true);
+      } else {
+        props.setPlay(false);
       }
     }
   };
 
   const handlePrevClick = () => {
-    if (currentIndex > 0) {
-      dispatch(reduceIndex());
-      dispatch(
-        setCurrentSong({
-          currentSong:
-            search === "" ? songs[currentIndex - 1] : searchSongs[currentIndex - 1]
-        })
+    if (props.currentIndex > 0) {
+      props.reduceIndex();
+      props.setCurrentSong(
+        props.search === "" ? props.songs[props.currentIndex - 1] : props.searchSongs[props.currentIndex - 1]
       );
     }
   };
 
   const handleNextClick = () => {
-    if (currentIndex < songs.length - 1) {
-      dispatch(addIndex());
-      dispatch(
-        setCurrentSong({
-          currentSong:
-            search === "" ? songs[currentIndex + 1] : searchSongs[currentIndex + 1]
-        })
+    if (props.currentIndex < props.songs.length - 1) {
+      props.addIndex();
+      props.setCurrentSong(
+        props.search === "" ? props.songs[props.currentIndex + 1] : props.searchSongs[props.currentIndex + 1]
       );
     }
   };
@@ -73,17 +53,17 @@ const SongPlayerContainer = () => {
   useEffect(() => {
     togglePlayback();
     // eslint-disable-next-line
-  }, [currentSong.previewUrl, isPlaying]);
+  }, [props?.currentSong?.previewUrl, props.isPlaying]);
 
-  const isPrevButtonDisabled = currentIndex === 0;
+  const isPrevButtonDisabled = props.currentIndex === 0;
 
   return (
     <StyledSongPlayerContainer>
       <div>
-        <img src={currentSong?.artworkUrl100} alt="pic" />
+        <img src={props.currentSong?.artworkUrl100} alt="pic" />
       </div>
       <div>
-        <p>{currentSong?.artistName}</p>
+        <p>{props.currentSong?.artistName}</p>
       </div>
       <div>
         <Button
@@ -96,7 +76,7 @@ const SongPlayerContainer = () => {
         <Button
           className="play-button"
           size={"medium"}
-          text={isPlaying ? <StyledPauseIcon /> : <StyledPlayIcon />}
+          text={props.isPlaying ? <StyledPauseIcon /> : <StyledPlayIcon />}
           onClick={togglePlay}
         />
         <Button
@@ -106,7 +86,7 @@ const SongPlayerContainer = () => {
           onClick={handleNextClick}
         />
       </div>
-      <audio ref={audioRef} src={currentSong?.previewUrl} />
+      <audio ref={audioRef} src={props.currentSong?.previewUrl} />
     </StyledSongPlayerContainer>
   );
 };

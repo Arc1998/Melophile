@@ -2,19 +2,21 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../reducers/userReducer';
 import { useNavigate } from 'react-router-dom';
 import { initialValues, validationSchema } from './validationSchema';
-import { useFormik } from 'formik';
+import { useFormik, FormikHelpers } from 'formik';
 import { Label } from '../../atom/FormLable';
 import { Input } from '../../atom/InputBox';
 import { Button } from '../../atom/Button';
 import { PageBackground, Card } from './LoginFormStyles';
 import { NotificationIconType, showToast } from '../../atom/Notification';
 
-
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleFormSubmit = (values: any) => {
+  const handleFormSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>
+  ) => {
     dispatch(login({ name: values.username, email: values.email }));
     showToast({
       message: "Login successful. Enjoy your music journey!",
@@ -22,11 +24,12 @@ const LoginForm = () => {
       iconType: NotificationIconType.CHECKED,
     });
     navigate('/home');
+    actions.setSubmitting(false);
   };
 
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: (val, actions) => handleFormSubmit(val),
+    onSubmit: handleFormSubmit,
     validationSchema: validationSchema,
   });
 
@@ -43,7 +46,7 @@ const LoginForm = () => {
             placeholder="Enter First Name"
             value={values.username}
             error={errors.username}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => { 
               setFieldValue("username", e.target.value);
             }}
           />
@@ -57,7 +60,7 @@ const LoginForm = () => {
             placeholder="Enter Email"
             value={values.email}
             error={errors.email}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => { 
               setFieldValue("email", e.target.value);
             }}
           />
@@ -72,7 +75,7 @@ const LoginForm = () => {
             placeholder="Enter Password"
             value={values.password}
             error={errors.password}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => { 
               setFieldValue("password", e.target.value);
             }}
           />

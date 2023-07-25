@@ -3,22 +3,24 @@ import {
   setCurrentSong,
   setPlay,
   addToFavourite,
-  setCurrentIndex
+  setCurrentIndex,
 } from "../../reducers/songReducer";
 import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji } from "../SongContainer/StyledSongContainer"
 import { useNavigate } from "react-router-dom";
 import { NotificationIconType, showToast } from "../../atom/Notification";
 
-const SongContainer = (props: any) => {
+
+
+const SongContainer = (props: SongContainerProps) => {
   const {
     currentSong,
     songAction: { isPlaying },
-  } = useSelector((state: { song: any }) => state.song);
+  } = useSelector((state: { song: SongState }) => state.song);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: {user: InitialStateType}) => state.user);
 
-  const setSong = (song: any) => {
+  const setSong = (song: Song) => {
     if (currentSong?.previewUrl === song.previewUrl && isPlaying) {
       dispatch(setPlay({ isPlaying: false }));
     } else if (currentSong?.previewUrl === song.previewUrl && !isPlaying) {
@@ -32,7 +34,7 @@ const SongContainer = (props: any) => {
   return (
     <>
       {props.songs?.length ? (
-        props.songs.map((song: any, index: number) => (
+        props.songs.map((song: Song, index: number) => (
           <>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <StyledSongContainer key={index} onClick={() => {
