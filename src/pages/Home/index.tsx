@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DEFAULT_SONG_REQUEST_LIMIT } from "../../constants";
 import SongContainer from "../../components/SongContainer";
 import { setCurrentSong, setSerchedSong, setSongs } from "../../reducers/songReducer";
 import { getSongs, refineSongsData } from "./helper";
@@ -24,7 +23,7 @@ const SongsContainer = () => {
   const getSongData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const newSongs = await getSongs("New Bollywood songs", page, DEFAULT_SONG_REQUEST_LIMIT);
+      const newSongs = await getSongs("New Bollywood songs", page);
       if (newSongs?.data !== null) {
         const refinedData = refineSongsData(newSongs?.data);
         if (currentSong.previewUrl === "") {

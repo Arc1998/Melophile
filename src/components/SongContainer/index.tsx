@@ -5,7 +5,7 @@ import {
   addToFavourite,
   setCurrentIndex,
 } from "../../reducers/songReducer";
-import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji } from "../SongContainer/StyledSongContainer"
+import { StyledSongContainer, StyledImage, StyledTrackInfo, StyledTrackName, StyledArtistName, StyledHeartIcon, StyledMusicEmoji, StyledAwaitingMessage } from "../SongContainer/StyledSongContainer"
 import { useNavigate } from "react-router-dom";
 import { NotificationIconType, showToast } from "../../atom/Notification";
 
@@ -74,7 +74,7 @@ const SongContainer = (props: SongContainerProps) => {
           </>
         ))
       ) : (
-        <p>No song Available</p>
+        <StyledAwaitingMessage>Awaiting New Favorites. Stay Excited</StyledAwaitingMessage>
       )}
     </>
   );

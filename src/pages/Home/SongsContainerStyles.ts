@@ -2,9 +2,10 @@ import styled ,{keyframes} from "styled-components";
 
 export const SongsContainerWrapper = styled.div`
   .songs-container {
-    margin-left: 300px;
+    margin-left: 390px;
     margin-top: 97px;
     padding: 20px;
+    
   }
 `;
 
@@ -22,7 +23,7 @@ const bounceAnimation = keyframes`
 
 export const NoResultsMessage = styled.p`
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;
   color: #ff5b5b;
   margin-top: 20px;
   animation: ${bounceAnimation} 1s infinite;

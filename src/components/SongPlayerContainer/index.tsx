@@ -3,7 +3,9 @@ import { Button } from "../../atom/Button";
 import {
   StyledSongPlayerContainer,
   StyledPlayIcon,
-  StyledPauseIcon
+  StyledPauseIcon,
+  StyledPreviousIcon,
+  StyledNextIcon
 } from "./StyledSongPlayerContainer";
 
 
@@ -66,25 +68,13 @@ const SongPlayerContainer = (props :SongPlayerContainerProps) => {
         <p>{props.currentSong?.artistName}</p>
       </div>
       <div>
-        <Button
-          variant="primary"
-          size={"large"}
-          text={"Prev"}
+      <StyledPreviousIcon
           onClick={handlePrevClick}
-          isDisable={isPrevButtonDisabled}
+          className={isPrevButtonDisabled ? "disabled" : ""}
         />
-        <Button
-          className="play-button"
-          size={"medium"}
-          text={props.isPlaying ? <StyledPauseIcon /> : <StyledPlayIcon />}
-          onClick={togglePlay}
-        />
-        <Button
-          variant="primary"
-          size={"large"}
-          text={"Next"}
-          onClick={handleNextClick}
-        />
+        
+          {props.isPlaying ? <StyledPauseIcon onClick={togglePlay} /> : <StyledPlayIcon onClick={togglePlay} />}
+        <StyledNextIcon onClick={handleNextClick} />
       </div>
       <audio ref={audioRef} src={props.currentSong?.previewUrl} />
     </StyledSongPlayerContainer>

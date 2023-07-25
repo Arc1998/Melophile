@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { PlayCircleOutlined, PauseCircleOutlined} from "@ant-design/icons";
+import { PlayCircleOutlined, PauseCircleOutlined,StepBackwardOutlined,StepForwardOutlined} from "@ant-design/icons";
 
 export const StyledSongPlayerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin-top: 150px;
-  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
  
   
 
@@ -46,6 +46,7 @@ export const StyledSongPlayerContainer = styled.div`
     font-size: 18px;
     color: #333;
     transition: color 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   audio {
@@ -56,6 +57,7 @@ export const StyledSongPlayerContainer = styled.div`
 export const StyledPlayIcon = styled(PlayCircleOutlined)`
   font-size: 36px;
   color: #ff4081;
+  
 `;
 
 export const StyledPauseIcon = styled(PauseCircleOutlined)`
@@ -63,3 +65,18 @@ export const StyledPauseIcon = styled(PauseCircleOutlined)`
   color: #ff4081;
 `;
 
+export const StyledPreviousIcon = styled(StepBackwardOutlined)`
+  font-size: 36px;
+  color: #ff4081;
+
+  &.disabled {
+    /* Add your styles for the disabled icon here */
+    color: #ccc; /* For example, change the color to grey */
+    pointer-events: none; /* Disable click events */
+  }
+`;
+
+export const StyledNextIcon = styled(StepForwardOutlined)`
+  font-size: 36px;
+  color: #ff4081;
+`;

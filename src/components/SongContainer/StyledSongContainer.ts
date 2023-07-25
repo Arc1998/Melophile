@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{keyframes} from "styled-components";
 import { HeartOutlined } from "@ant-design/icons";
 
 export const StyledSongContainer = styled.div`
@@ -25,7 +25,7 @@ export const StyledArtistName = styled.p`
 `;
 
 export const StyledHeartIcon = styled(HeartOutlined)`
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
   margin-left: 10px;
   transition: color 0.3s ease-in-out;
@@ -38,4 +38,26 @@ export const StyledHeartIcon = styled(HeartOutlined)`
 export const StyledMusicEmoji = styled.span`
   font-size: 18px;
   margin-right: 10px;
+`;
+
+
+const pulseAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+export const StyledAwaitingMessage = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff4081;
+  text-align: center;
+  margin: 10px 0;
+  animation: ${pulseAnimation} 2s infinite;
 `;

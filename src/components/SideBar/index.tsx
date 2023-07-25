@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import { SidebarPanel } from "./style";
+import { SidebarPanel, StyledHeading } from "./style";
 import SongPlayerContainer from "../SongPlayerContainer";
 import SongContainer from "../SongContainer";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,13 +43,14 @@ const SideBar: React.FC = () => {
   return (
     <SidebarPanel>
       <Layout>
-        <Sider
+      <Sider
           style={{
             minWidth: "100%",
             maxWidth: "100%",
             height: "100%",
             position: "fixed",
             overflow: "auto",
+            marginTop:"100px"
           }}
         >
           <SongPlayerContainer
@@ -65,11 +66,11 @@ const SideBar: React.FC = () => {
             currentIndex={currentIndex}
           />
           <div style={{ marginTop: "12px" }}>
-            <h2>Favourite Songs</h2>
+          <StyledHeading> Favourites</StyledHeading>
             <SongContainer songs={favSongs} />
           </div>
         </Sider>
-      </Layout>
+        </Layout>
     </SidebarPanel>
   );
 };
