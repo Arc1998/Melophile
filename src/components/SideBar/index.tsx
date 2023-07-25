@@ -50,7 +50,6 @@ const SideBar: React.FC = () => {
             height: "100%",
             position: "fixed",
             overflow: "auto",
-            marginTop:"100px"
           }}
         >
           <SongPlayerContainer
