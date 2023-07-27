@@ -6,6 +6,7 @@ import { getSongs, refineSongsData } from "./helper";
 import NavHeader from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar";
 import { NoResultsMessage, SongsContainerWrapper } from "./SongsContainerStyles";
+import Loader from "../../atom/loading";
 
 const SongsContainer = () => {
   const {
@@ -88,7 +89,7 @@ const SongsContainer = () => {
         <SideBar />
         <div className="songs-container">
           {isLoading ? (
-            <p>Loading...</p>
+            <Loader color={"#36d7b7"} height={50} width={4}/>
           ) : (
             searchResultsAvailable ? (
               <SongContainer songs={search === "" ? songs : searchSongs} />
